@@ -3,15 +3,18 @@ if(isset($_REQUEST['d_id'])){
     $delete_id=$_REQUEST['d_id'];
 }else{
 }
-$wpdb->delete('employee',array(
-    'id'=>$delete_id
+$exist=$wpdb->delete('employee',array(
+    'employee_id'=>$delete_id
 ));
-$select_data=$wpdb->get_var($wpdb->prepare("SELECT employee_id FROM `employee` WHERE `id`=%d",$delete_id));
-if($select_data==""){
-    $rc=1;
-}else{
+if($exist==1){
     $rc=0;
+    $msg="删除成功";
+}else{
+    $rc=4;
+    $msg="删除失败";
 }
+$rv->exist=$exist;
 $rv->rc=$rc;
+$rv->msg=$msg;
 exit(json_encode($rv));
 ?>
