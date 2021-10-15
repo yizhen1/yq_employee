@@ -23,16 +23,20 @@ function read_args($key_array){
 $data=read_args($arrs);
 $exists=$wpdb->get_var($wpdb->prepare("SELECT employee_id FROM employee WHERE `employee_id`=%s",$add_id));
 if(isset($exists)){
-    $rc=4;
-    $msg="已经存在该员工编号";
 }else{
     if(empty($exists)){
         $update_data=$wpdb->insert('employee',$data);
-        $rc=0;  
-        $msg="添加员工成功";
+        if($update_data==false){
+            $rc=4;
+            $msg="添加员工失败";   
+        }else{
+            $rc=0;  
+            $msg="添加员工成功";
+        }
+        
     }else{
         $rc=4;
-        $msg="添加员工失败";
+        $msg="已经存在该员工编号";
     }
 }
 $rv->rc=$rc;

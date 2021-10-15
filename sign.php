@@ -9,11 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>test</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
   </head>
   <body>
-  <?php 
+  <?php
     if(isset($_REQUEST['eid'])){
         if(empty($_REQUEST['eid'])){
             echo "<h1>打卡无效</h1>";
@@ -25,6 +24,7 @@
                 if(isset($exist)){
                     if(empty($exist)){
                         echo "<h1>查询结果为空</h1>";
+                        exit();
                     }else{
                         
                     }
@@ -56,15 +56,16 @@
                 }else{
                     $.ajax({
                        tpye:"POST",
-                       url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=a_clock',
+                       url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=c_clock',
                        data:{
                            sign_id:$("#s_id").val()
                        },
                        success:function(response){
                         var responseObj=JSON.parse(response);
-                        alert(responseObj.msg);
                         if(responseObj.rc==0){
-                            // 
+                            alert(responseObj.msg);
+                        }else{
+                            alert(responseObj.msg);
                         }
                        }
                     });

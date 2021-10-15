@@ -6,7 +6,7 @@ if(isset($_REQUEST['d_id'])){
 $exist=$wpdb->delete('employee',array(
     'employee_id'=>$delete_id
 ));
-if($exist==1){
+if($exist==true){
     $rc=0;
     $msg="删除成功";
 }else{

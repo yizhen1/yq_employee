@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>test</title>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
   </head>
   <body>
@@ -18,7 +17,7 @@
       <div class="row" style="margin:0px; margin-top:25px;">
         <div class="col-lg-6 col-lg-offset-3 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group">
-            <input type="text" id="select-input" class="form-control" placeholder="请输入员工编号">
+            <input type="text" id="select-input" class="form-control" placeholder="请输入员工编号(xxxx(3~4位字母)-xxxx(4位数字))">
             <span class="input-group-btn">
             <button class="btn btn-info" type="button" id="s_employee"><span class="glyphicon glyphicon-search" style="margin-right:10px;"></span>查询</button>
             </span>
@@ -75,7 +74,7 @@
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <label>员工编号:</label>
-                <input type="text" class="form-control" id="update_id" name="employee_id" placeholder="员工编号"  required="required">
+                <input type="text" class="form-control" id="update_id" name="employee_id" placeholder="员工编号(xxxx(3~4位字母)-xxxx(4位数字))"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
                 <label style="margin-right:15px;">性别:</label>
@@ -168,7 +167,7 @@
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <label>员工编号:</label>
-                <input type="text" class="form-control" id="add_id" name="employee_id" placeholder="员工编号"  required="required">
+                <input type="text" class="form-control" id="add_id" name="employee_id" placeholder="员工编号(xxxx(3~4位字母)-xxxx(4位数字))"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
                 <label style="margin-right:15px;">性别:</label>
@@ -287,41 +286,10 @@
               </div>
             </div>
             </div>
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-              </button>
-              <button type="button" class="btn btn-primary">
-                提交更改
-              </button>
-            </div> -->
           </div>
         </div>
     </div>
-        <div id="s_clock" class="col-lg-5 col-md-3 col-sm-6 col-xs-12 col-xs-offset s_clock" style="padding:7px;margin-left:0;">
-          <div class="table-responsive ">
-            <!-- <h2>考勤情况</h2> -->
-          </div>
-          <div style="margin-top:15px;">
-          <button type="button" class="btn btn-default"style="float:left;" id="situation-cancel">cancel</button>
-          <button type="button" class="btn btn-success" style="float:right;" id="situation-success">前去打卡</button>
-          </div>
-        </div>
-        <div class="col-lg-3 col-lg-offset-4 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2" 
-        style="background:#ffffff; border:1px solid rgba(0,0,0,.2); 
-        padding:5px; position:absolute; left:0; right:0; margin:0 auto; top:30px; z-index:999;
-        display:none;" id="clock-box">
-        <h3>员工打卡</h3>
-        <form class="form-inline">
-          <div class="form-group">
-            <label for="clock-id">ID</label>
-            <input type="text" class="form-control" id="clock-id" placeholder="请输入员工编号">
-          </div>
-          <button type="button" class="btn btn-success" style="float:right;" id="clock-success">打卡</button>
-          <button type="button" class="btn btn-default" style="float:left;" id="clock-cancel">cancel</button>
-        </form>
-        </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-      <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script>
   function ctime(value){
@@ -350,10 +318,9 @@
     }
   }
     $(function(){
-      // document.ready()
       $.ajax({
         type:"POST",
-        url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=s_employee',
+        url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=r_employee',
         success:function(response){
           var responseObj=JSON.parse(response);
           if(responseObj.rc==0){
@@ -391,7 +358,7 @@
                   console.log(id);
                   $.ajax({
                     type:"POST",
-                    url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=s_employee',
+                    url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=r_employee',
                     data:{
                       employee_id:id
                     },
@@ -430,7 +397,6 @@
         }
       });
       $("#u_form").submit(function(e){
-        // e.preventDefault();
         if($("#u_same").val()==$("#update_id").val()){
           $("#u_shape").val("1");
         }else{
@@ -444,9 +410,10 @@
             var responseObj=JSON.parse(response);
             console.log(responseObj);
             if(responseObj.rc==0){
-              console.log(responseObj.msg);
+              alert(responseObj.msg);
             }else{
-              console.log(responseObj.msg);
+              e.preventDefault();
+              alert(responseObj.msg);
             }
           }
         });
@@ -482,7 +449,7 @@
             url:'<?php echo get_site_url()?>/api-data/?',
             data:{
               module:"employee",
-              action:"s_employee",
+              action:"r_employee",
               employee_id:$("#select-input").val()
             },
             success:function(response){
@@ -523,9 +490,10 @@
         $("#c_modal").modal('toggle');
       })
       $("#c_form").submit(function(e){
+        // e.preventDefault();
         $.ajax({
           type:"POST",
-          url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=a_employee',
+          url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=c_employee',
           data:$("#c_form").serialize(),
           success:function(response){
             var responseObj=JSON.parse(response);
@@ -546,7 +514,7 @@
         }else{
           $.ajax({
             type:"POST",
-            url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=s_employee',
+            url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=r_employee',
             data:{
               employee_id:$("#u_same").val()
             },
@@ -589,7 +557,7 @@
         }
         $.ajax({
           type:"POST",
-          url:"<?php echo get_site_url() ?>/api-data/?module=clock&action=s_clock",
+          url:"<?php echo get_site_url() ?>/api-data/?module=clock&action=r_clock",
           data:{
             mode:$("#sign_mode").val()
           },
@@ -636,7 +604,7 @@
         }
         $.ajax({
           type:"POST",
-          url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=s_clock',
+          url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=r_clock',
           data:{
             r_name:$("#sign_name").val(),
             r_id:$("#sign_id").val(),
@@ -671,289 +639,19 @@
           }
         })
       });
-      // $("#u_employee").click(function(){
-      //   if($("#index").text()){
-      //     $.ajax({
-      //       type:"POST",
-      //       url:'/api-data/?',
-      //       data:{
-      //         module:"employee",
-      //         action:"s_employee",
-      //         employee_id:$("#select-input").val()
-      //       },
-      //       success:function(response){
-      //         $("#forms").dialog("open");
-      //         var responseObj=JSON.parse(response);
-      //         $("#update_name").val(responseObj.content.e_name);
-      //         $("#update_birth").val(responseObj.content.birthday);
-      //         $("#update_grade").val(responseObj.content.e_grade);
-      //         $("#update_hire").val(responseObj.content.hire_date);
-      //         $("#update_remarks").val(responseObj.content.remarks);
-      //         $("#update_card").val(responseObj.content.id_card);
-      //         $("#update_id").val(responseObj.content.employee_id);
-      //         if($("#update_sex1").val()==responseObj.content.sex){
-      //             $("#update_sex1").prop("checked",true);
-      //         }else{
-      //             $("#update_sex2").prop("checked",true);
-      //         }
-      //       }
-      //     })
-      //   }else{
-      //     alert('员工信息不能为空');
-      //   }
-      // });
-      $("#u-btn-submit").click(function(){
-        if($("#update_name").val()&&$("#update_birth").val()&&$("#update_grade").val()&&$("#update_hire").val()&&
-          $("#update_remarks").val()&&$("#update_card").val()&&$("#update_id").val()&&$("input:radio:checked").val()){
-            if($("#index").text()==$("#update_id").val()){
-              $("#u_shape").val("1");
-            }else{
-              $("#u_shape").val("2");
-            }
-            $.ajax({
-              type:"POST",
-              url:'<?php echo get_site_url()?>/api-data/?module=employee&action=u_employee',
-              data:$("#u_form").serialize(),
-              success:function(response){
-                var responseObj=JSON.parse(response);
-                console.log(responseObj);
-                if(responseObj.rc==1||responseObj.rc==2){
-                  alert("修改成功");
-                  $("#forms").dialog("close");
-                  location.reload();
-                }else{
-                  alert("修改失败");
-                }
-              }
-            })
-        }else{
-            alert("请输入完整信息");
-          }
-      });
-      $("#u-btn-cancel").click(function(){
-          $("#forms").dialog("close");
-        });
-      $("#a_employee").click(function(){
-        $("#forms2").dialog("open"); 
-      });
-      $("#a-btn-submit").click(function(){
-        if($("#add_name").val()&&$("#add_birth").val()&&$("#add_grade").val()&&$("#add_hire").val()&&
-          $("#add_remarks").val()&&$("#add_card").val()&&$("#add_id").val()&&$("input:radio:checked").val()){
-          $.ajax({
-            type:"POST",
-            url:'<?php echo get_site_url()?>/api-data/?module=employee&action=a_employee',
-            data:$("#a_form").serialize(),
-            success:function(response){
-              var responseObj=JSON.parse(response);
-              console.log(responseObj);
-              if(responseObj.rc==1){
-                  alert("添加成功");
-                  $("#forms2").dialog("close");
-                  location.reload();
-              }else{
-                alert("添加失败");
-              }
-            }
-          }) 
-        }
-      });
-      $("#a-btn-cancel").click(function(){
-        $("#forms2").dialog("close");
-      });
-      $("#d_employee").click(function(){
-        if($("#index").text()){
-          $("#d_form").dialog("open");
-        }else{
-          alert("员工编号为空");
-        }
-      });
-      $("#btn-d-submit").click(function(){
-        $.ajax({
-          type:"POST",
-          url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=d_employee',
-          data:{
-            d_id:$("#e_id").val()
-          },
-          success:function(response){
-            var responseObj=JSON.parse(response);
-            if(responseObj.rc==1){
-              alert("删除成功");
-              $("#d_form").dialog("close");
-              location.reload();
-            }else{
-              alert("删除失败");
-            }
-          }
-        });
-      });
-      $("#btn-d-cancel").click(function(){
-        $("#d_form").dialog("close");
-      });
-      $("#clock").click(function(){
-        if($("#table_clock").text()==""){
-          $.ajax({
-          type:"POST",
-          url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=s_clock&mode=1',
-          success:function(response){
-            var responseObj=JSON.parse(response);
-            console.log(responseObj);
-            if(responseObj.rc==1){
-              console.log("查询成功");
-              for(var i=0; i<responseObj.data.length;i++){
-                $("#table_clock").append(
-                  "<tr>"+"<td>"+
-                  responseObj.data[i].e_name+
-                  "</td><td>"+
-                  responseObj.data[i].employee_id+
-                  "</td><td>"+
-                  responseObj.data[i].start_date+
-                  "</td><td>"+
-                  responseObj.data[i].end_date+
-                  "</td><td>"+
-                  ctime(responseObj.data[i].clock)+
-                  "</td><td>"+
-                  responseObj.data[i].situation+
-                  "</td></tr>")
-              }
-            }
-          }
-        })
-        }else{
-        }
-        $("#s_clock").css("display","block");
-      });
-      $("#situation-cancel").click(function(){
-        $("#s_clock").css("display","none");
-      });
-      $("#situation-success").click(function(){
-        $("#clock-box").css("display","block");
-        $("#s_clock").css("display","none");
-      });
-      $("#select_clock").click(function(){
-        if($("#select_employee_name").val()!=""&&$("#select_employee_id").val()!=""){
-          $.ajax({
-          type:"POST",
-          url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=s_clock&mode=2',
-          data:{
-            select_name:$("#select_employee_name").val(),
-            select_id:$("#select_employee_id").val()
-          },
-          success:function(response){
-            var responseObj=JSON.parse(response);
-            console.log(responseObj);
-            if(responseObj.rc==1){
-              console.log("查询成功");
-              $("#table_clock").empty();
-              for(var i=0; i<responseObj.data.length;i++){
-                $("#table_clock").append(
-                  "<tr>"+"<td>"+
-                  responseObj.data[i].e_name+
-                  "</td><td>"+
-                  responseObj.data[i].employee_id+
-                  "</td><td>"+
-                  responseObj.data[i].start_date+
-                  "</td><td>"+
-                  responseObj.data[i].end_date+
-                  "</td><td>"+
-                  responseObj.data[i].clock+
-                  "</td><td>"+
-                  responseObj.data[i].situation+
-                  "</td></tr>")
-              }
-            }else{
-              console.log("查询失败");
-            }
-          }
-          });
-        }else{
-          alert("请输入完整信息");
-        }
-      });
-      $("#clock-cancel").click(function(){
-        $("#clock-box").css("display","none");
-      });
-      $("#clock-success").click(function(){
-        if($("#clock-id").val()){
-          $.ajax({
-            type:"POST",
-            url:"<?php echo get_site_url() ?>/api-data/?module=clock&action=a_clock",
-            data:{
-              clock_id:$("#clock-id").val()
-            },
-            success:function(response){
-              console.log(response);
-              var responseObj=JSON.parse(response);
-              console.log(responseObj);
-              if(responseObj.rc==1){
-                alert("打卡成功");
-                location.reload();
-              }else{
-                alert("打卡失败");
-                location.reload();
-              }
-            }
-          })
-        }else{
-          alert("请输入打卡员工编号");
-        }
-      });
     });
   </script>
   </body>
   <style>
-    .title-row{
-      margin-left:0px;
-      margin-right:0px;
-      display:flex;
-      justify-content:center;
-      margin-top:45px;
-    }
     .e-msg{
       display:flex;
 =     word-break:break-all;
       white-space:normal;
       margin-top:10px;
     }
-    .forms{
-      margin:0 auto;
-      position:absolute;
-      left:0;
-      right:0;
-      background:white;
-      border:1px solid rgba(0,0,0,0.2);
-      border-radius:15px;
-=     z-index:999;
-      display:none;
-    }
     .e-msg label{
       word-break:keep-all;
       align-self:center;
-    }
-    .btn-cancel{
-      float:left;
-    }
-    .btn-submit{
-      float:right;
-      margin-bottom:10px;
-    }
-    .ui-dialog-titlebar{
-      display:none;
-    }
-    .ui-dialog{
-      border-radius:15px;
-      border:1px solid rgba(0,0,0,.2);
-      background:white;
-    }
-    .s_clock{
-      position:absolute;
-      left:0;
-      right:0;
-      margin:0 auto;
-      z-index:999;
-      display:none;
-      background:#ffffff;
-      border:1px solid rgba(0,0,0,.2);
-      top:30px;
     }
     .table-style{
       margin-top:20px;

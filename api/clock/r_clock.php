@@ -2,7 +2,7 @@
 if(isset($_REQUEST["mode"])){
     $mode=$_REQUEST["mode"];
     if($mode==1){
-        $arr=$wpdb->get_results($wpdb->prepare("SELECT *,time(`start_date`) as sign_start,time(`end_date`) as sign_end, TIMESTAMPDIFF(SECOND,`start_date`,`end_date`) as work_time FROM clock_record ORDER BY `start_date` DESC"));
+        $arr=$wpdb->get_results($wpdb->prepare("SELECT *, TIMESTAMPDIFF(SECOND,`start_date`,`end_date`) as work_time FROM clock_record ORDER BY `start_date` DESC"));
         if(isset($arr)){
             if(empty($arr)){
                 $msg="查询结果为空";
@@ -24,7 +24,7 @@ if(isset($_REQUEST["mode"])){
         if(isset($_REQUEST["r_name"])&&isset($_REQUEST["r_id"])){
             $r_name=$_REQUEST["r_name"];
             $r_id=$_REQUEST["r_id"];
-            $arr=$wpdb->get_results($wpdb->prepare("SELECT *,time(`start_date`) as sign_start,time(`end_date`) as sign_end, TIMESTAMPDIFF(SECOND,`start_date`,`end_date`) as work_time FROM clock_record WHERE `e_name`=%s and `employee_id`=%s",$r_name,$r_id));
+            $arr=$wpdb->get_results($wpdb->prepare("SELECT *, TIMESTAMPDIFF(SECOND,`start_date`,`end_date`) as work_time FROM clock_record WHERE `e_name`=%s and `employee_id`=%s",$r_name,$r_id));
             if(isset($arr)){
                 if(empty($arr)){
                     $msg="查询结果为空";

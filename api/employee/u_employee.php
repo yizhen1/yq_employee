@@ -22,24 +22,37 @@ if($u_shape==1){
     $update_data=$wpdb->update('employee',$data,array(
         'id'=>$u_id
     ));
-    $rc=0;
-    $msg="修改个人信息完成";
+    if($update_data==false){
+        $rc=4;
+        $msg="修改个人信息失败";
+    }else{
+        $rc=0;
+        $msg="修改个人信息成功";
+    }
 }elseif($u_shape==2){
     $exist=$wpdb->get_var($wpdb->prepare("SELECT employee_id FROM employee WHERE `employee_id`=%s",$employee_id));
     if(empty($exist)){
         $update_data=$wpdb->update('employee',$data,array(
             'id'=>$u_id
         ));
-        $rc=0;
-        $msg="修改为:".$employee_id;
+        if($update_data==false){
+            $rc=4;
+            $msg="修改信息失败";
+        }else{
+            $rc=0;
+            $msg="修改为:".$employee_id."完成";
+        }
     }else{
         $rc=4;
         $msg="已经存在该员工编号";
     }
+}else{
+    $rc=4;
+    $msg="参数错误";
 }
 $rv->exist=$exist;
 $rv->rc=$rc;
 $rv->msg=$msg;
-$rv->data=$data;
+$rv->data=$update_data;
 exit(json_encode($rv));
 ?>
