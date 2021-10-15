@@ -1,6 +1,7 @@
 <?php
-$arrs=["e_id","update_name","update_id","update_sex","update_card","update_birth",
-"update_grade","update_hire","update_remarks","u_shape"];
+$arrs=["e_name","employee_id","sex","id_card","birthday",
+"e_grade","hire_date","remarks"];
+$array=["u_id","u_shape"];
 function read_args($key_array){
     $arr=array();
     foreach($key_array as $key){
@@ -8,63 +9,48 @@ function read_args($key_array){
         if(isset($_REQUEST[$key])){
             $$key=$_REQUEST[$key];
         }else{
-            $$key="";
+            $rc=4;
+            $msg="参数不存在";
         }
         $arr[$key]=$$key;
     }
     return $arr;
 }
-read_args($arrs);
-if($e_id&&$update_name&&$update_id&&$update_sex&&$update_card&&$update_birth&&$update_grade
-&&$update_hire&&$update_remarks&&$u_shape){
-    $u_permit=1;
-}else{
-    $u_permit=0;
-}
-if($u_permit==1){
-    if($u_shape==1){
-        $update_data=$wpdb->update('employee',array(
-            'e_name'=>$update_name,
-            'employee_id'=>$update_id,
-            'sex'=>$update_sex,
-            'birthday'=>$update_birth,
-            'id_card'=>$update_card,
-            'e_grade'=>$update_grade,
-            'hire_date'=>$update_hire,
-            'remarks'=>$update_remarks
-        ),array(
-            'id'=>$e_id
+$data=read_args($arrs);
+read_args($array);
+if($u_shape==1){
+    $update_data=$wpdb->update('employee',$data,array(
+        'id'=>$u_id
+    ));
+    if($update_data==false){
+        $rc=4;
+        $msg="修改个人信息失败";
+    }else{
+        $rc=0;
+        $msg="修改个人信息成功";
+    }
+}elseif($u_shape==2){
+    $exist=$wpdb->get_var($wpdb->prepare("SELECT employee_id FROM employee WHERE `employee_id`=%s",$employee_id));
+    if(empty($exist)){
+        $update_data=$wpdb->update('employee',$data,array(
+            'id'=>$u_id
         ));
-        $rc=2;
-        $msg="修改个人信息完成";
-    }elseif($u_shape==2){
-        $data_id=$wpdb->get_var($wpdb->prepare("SELECT employee_id FROM employee WHERE `employee_id`=%s",$update_id));
-        if(isset($data_id)){
-            $rc=0;
-            $msg="已经存在该员工编号";
+        if($update_data==false){
+            $rc=4;
+            $msg="修改信息失败";
         }else{
-            $update_data=$wpdb->update('employee',array(
-                'e_name'=>$update_name,
-                'employee_id'=>$update_id,
-                'sex'=>$update_sex,
-                'birthday'=>$update_birth,
-                'id_card'=>$update_card,
-                'e_grade'=>$update_grade,
-                'hire_date'=>$update_hire,
-                'remarks'=>$update_remarks
-            ),array(
-                'id'=>$e_id
-            ));
-            $rc=1;
-            $msg="更改为".$update_id."完成";
+            $rc=0;
+            $msg="修改为:".$employee_id."完成";
         }
+    }else{
+        $rc=4;
+        $msg="已经存在该员工编号";
     }
 }else{
-    if($u_permit==0){
-        $rc=3;
-        $msg="修改信息不完整";
-    }
+    $rc=4;
+    $msg="参数错误";
 }
+$rv->exist=$exist;
 $rv->rc=$rc;
 $rv->msg=$msg;
 $rv->data=$update_data;
