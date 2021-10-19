@@ -17,7 +17,7 @@
       <div class="row" style="margin:0px; margin-top:25px;">
         <div class="col-lg-6 col-lg-offset-3 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group">
-            <input type="text" id="select-input" class="form-control" placeholder="请输入员工编号(xxxx(3~4位字母)-xxxx(4位数字))">
+            <input type="text" id="select-input" class="form-control" placeholder="请输入员工编号">
             <span class="input-group-btn">
             <button class="btn btn-info" type="button" id="s_employee"><span class="glyphicon glyphicon-search" style="margin-right:10px;"></span>查询</button>
             </span>
@@ -69,15 +69,15 @@
                 <input type="hidden" name="u_id" id="u_id" value="">
                 <input type="hidden" name="u_shape" id="u_shape" value="">
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <label>姓名:</label>
+                <label>姓名:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" class="form-control" id="update_name" name="e_name" placeholder="姓名" autofocus="autofocus"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <label>员工编号:</label>
-                <input type="text" class="form-control" id="update_id" name="employee_id" placeholder="员工编号(xxxx(3~4位字母)-xxxx(4位数字))"  required="required">
+                <label>员工编号:</label>&nbsp;&nbsp;&nbsp;
+                <input type="text" class="form-control" id="update_id" name="employee_id" placeholder="员工编号"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
-                <label style="margin-right:15px;">性别:</label>
+                <label style="margin-right:15px;">性别:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div style="display:flex;margin:0 auto; flex:1;">
                   <div class="radio" style="float:left; flex:1;">
                     <label>
@@ -93,23 +93,23 @@
                 </div>
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>身份证:</label>
+                  <label>身份证:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="text" class="form-control" id="update_card" name="id_card" placeholder="身份证"  required="required">
                 </div>  
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>出生日期:</label>
+                  <label>出生日期:</label>&nbsp;&nbsp;&nbsp;
                   <input type="date" class="form-control" id="update_birth" name="birthday" placeholder="出生日期"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12"> 
-                  <label>等级:</label>
+                  <label>等级:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="number" class="form-control" id="update_grade" name="e_grade" placeholder="等级"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>入职时间:</label>
+                  <label>入职时间:</label>&nbsp;&nbsp;&nbsp;
                   <input type="date" class="form-control" id="update_hire" name="hire_date" placeholder="入职时间"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>备注:</label>
+                &nbsp;&nbsp;<label>备注:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="text" class="form-control" id="update_remarks" name="remarks" placeholder="备注"  required="required">
                 </div>
                 <div style="float:right; margin-top:20px; margin-right:30px;">
@@ -162,15 +162,15 @@
             <div class="modal-body" style="padding:0px;">
               <form id="c_form">
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <label>姓名:</label>
+                <label>姓名:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" class="form-control" id="add_name" name="e_name" placeholder="姓名" autofocus="autofocus"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <label>员工编号:</label>
-                <input type="text" class="form-control" id="add_id" name="employee_id" placeholder="员工编号(xxxx(3~4位字母)-xxxx(4位数字))"  required="required">
+                <label>员工编号:</label>&nbsp;&nbsp;&nbsp;
+                <input type="text" class="form-control" id="add_id" name="employee_id" placeholder="员工编号"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
-                <label style="margin-right:15px;">性别:</label>
+                <label style="margin-right:15px;">性别:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div style="display:flex;margin:0 auto; flex:1;">
                   <div class="radio" style="float:left; flex:1;">
                     <label>
@@ -186,23 +186,23 @@
                 </div>
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>身份证:</label>
+                  <label>身份证:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="text" class="form-control" id="add_card" name="id_card" placeholder="身份证"  required="required">
                 </div>  
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>出生日期:</label>
+                  <label>出生日期:</label>&nbsp;&nbsp;&nbsp;
                   <input type="date" class="form-control" id="add_birth" name="birthday" placeholder="出生日期"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12"> 
-                  <label>等级:</label>
+                  <label>等级:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="number" class="form-control" id="add_grade" name="e_grade" placeholder="等级"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>入职时间:</label>
+                  <label>入职时间:</label>&nbsp;&nbsp;&nbsp;
                   <input type="date" class="form-control" id="add_hire" name="hire_date" placeholder="入职时间"  required="required">
                 </div>
                 <div class="form-group  e-msg col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                  <label>备注:</label>
+                &nbsp;&nbsp;<label>备注:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="text" class="form-control" id="add_remarks" name="remarks" placeholder="备注"  required="required">
                 </div>
                 <div style="float:right; margin-top:20px; margin-right:30px;">
@@ -239,8 +239,9 @@
       </div>
         <div style="display:flex; justify-content:center; margin-top:25px;">
           <button type="button" class="btn btn-info" id="c_employee" style="margin-right:20px;"><span class="glyphicon glyphicon-plus" style="margin-right:10px;"></span>添加</button>
-          <button type="button" class="btn btn-success" id="sign" style="margin-left:20px;"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>打卡</button>
-          <button type="button" class="btn btn-default" id="r_show" style="margin-left:20px;">显示</button>
+          <button type="button" class="btn btn-success" id="sign" style="margin-left:20px;"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>打卡记录</button>
+          <button type="button" class="btn btn-success"  style="margin-left:20px;" id="sign_enter">打卡入口</button>
+          <button type="button" class="btn btn-default" id="r_show" style="margin-left:20px;">显示/折叠列表</button>
         </div>
       <div class="modal fade" id="clock_sign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -316,6 +317,86 @@
     }else{
       return "-";
     }
+  }
+  function read(){
+    $.ajax({
+        type:"POST",
+        url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=r_employee',
+        success:function(response){
+          var responseObj=JSON.parse(response);
+          if(responseObj.rc==0){
+            for(var i=0; i<responseObj.data.length;i++){
+              if(responseObj.data[i].sex==1){
+                var e_sex="男";
+              }else{
+                e_sex="女";
+              }
+              $("#table_select").append(
+                "<tr>"+"<td>"+
+                responseObj.data[i].e_name+
+                "</td><td>"+
+                responseObj.data[i].employee_id+
+                "</td><td>"+      
+                e_sex+
+                "</td><td>"+
+                responseObj.data[i].id_card+
+                "</td><td>"+
+                responseObj.data[i].birthday+
+                "</td><td>"+
+                responseObj.data[i].e_grade+
+                "</td><td>"+
+                responseObj.data[i].hire_date+
+                "</td><td>"+
+                responseObj.data[i].remarks+
+                "</td><td>"+
+                "<button type='button' id='u_employees' name="+responseObj.data[i].employee_id+">修改</button>"+
+                "<button type='button' id='d_employees' name="+responseObj.data[i].employee_id+">删除</button>"+
+                "</td></tr>")
+              }
+              $("#table_select #u_employees").bind("click",function(){
+                var id=$(this).attr("name");
+                if(id!=""){
+                  console.log(id);
+                  $.ajax({
+                    type:"POST",
+                    url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=r_employee',
+                    data:{
+                      employee_id:id
+                    },
+                    success:function(response){
+                      var responseObj=JSON.parse(response);
+                      console.log(responseObj);
+                      if(responseObj.rc==0){
+                        $("#u_modal").modal('toggle');
+                        $("#u_id").val(responseObj.data[0].id);
+                        $("#update_name").val(responseObj.data[0].e_name);
+                        $("#update_birth").val(responseObj.data[0].birthday);
+                        $("#update_grade").val(responseObj.data[0].e_grade);
+                        $("#update_hire").val(responseObj.data[0].hire_date);
+                        $("#update_remarks").val(responseObj.data[0].remarks);
+                        $("#update_card").val(responseObj.data[0].id_card);
+                        $("#update_id").val(responseObj.data[0].employee_id);
+                        $("#u_same").val(responseObj.data[0].employee_id);
+                        if($("#update_sex1").val()==responseObj.data[0].sex){
+                            $("#update_sex1").prop("checked",true);
+                        }else{
+                            $("#update_sex2").prop("checked",true);
+                        }
+                      }
+                    }
+                  })
+                }
+              });
+              $("#table_select #d_employees").bind("click",function(){
+                var id=$(this).attr("name");
+                $("#d_modal").modal('toggle');
+                $("#d_employee_id").text(id);
+                $("#d_value").val(id);
+              });
+                //ajax异步请求.
+          }
+        }
+      });
   }
     $(function(){
       $.ajax({
@@ -397,6 +478,7 @@
         }
       });
       $("#u_form").submit(function(e){
+        e.preventDefault();
         if($("#u_same").val()==$("#update_id").val()){
           $("#u_shape").val("1");
         }else{
@@ -410,15 +492,18 @@
             var responseObj=JSON.parse(response);
             console.log(responseObj);
             if(responseObj.rc==0){
-              alert(responseObj.msg);
+              // alert(responseObj.msg);
+              $("#u_modal").modal("toggle");
+              $("#table_select").empty();
+              read();
             }else{
-              e.preventDefault();
               alert(responseObj.msg);
             }
           }
         });
       });
-      $("#d_submit").click(function(){
+      $("#d_submit").click(function(e){
+        e.preventDefault();
         if($("#d_employee_id").text()!=""){
           $.ajax({
             type:"POST",
@@ -430,14 +515,17 @@
               var responseObj = JSON.parse(response);
               console.log(responseObj);
               if(responseObj.rc==0){
-                location.reload();
+                $("#d_modal").modal("toggle");
+                $("#table_select").empty();
+                read();
+              }else{  
+                alert(responseObj.msg);
               }
             }
           });
         }else{
           console.log("选择不能为空");
         }
-        
       });
       $("#s_employee").click(function(){
         console.log($("#select-input").val());
@@ -490,7 +578,7 @@
         $("#c_modal").modal('toggle');
       })
       $("#c_form").submit(function(e){
-        // e.preventDefault();
+        e.preventDefault();
         $.ajax({
           type:"POST",
           url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=c_employee',
@@ -498,6 +586,13 @@
           success:function(response){
             var responseObj=JSON.parse(response);
             console.log(responseObj);
+            if(responseObj.rc==0){
+              $("#c_modal").modal("toggle");
+              $("#table_select").empty();
+              read();
+            }else{
+              alert(responseObj.msg);
+            }
           }
         });
       });
@@ -563,14 +658,39 @@
           },
           success:function(response){
             var responseObj=JSON.parse(response);
-            console.log(responseObj);
+            // console.log(responseObj);
             if(responseObj.rc==0){
               $("#sign_tbody").empty();
               $("#sign_table").css("display","block");
               console.log("查询成功");
               for(var i=0; i<responseObj.data.length;i++){
+                // console.log(responseObj.data[i]);
                 if(responseObj.data[i].end_date=="0000-00-00 00:00:00"){
                   responseObj.data[i].end_date="未打卡";
+                }
+                
+                if(responseObj.data[i].st<=0){
+                  var cmg1='';
+                }else{
+                  if(responseObj.data[i].st>=240){
+                    var cmg1="上午请假";
+                  }else{
+                    var cmg1="迟到"+Math.round(responseObj.data[i].st)+"分钟";
+                  } 
+                }
+                if(responseObj.data[i].et>0){
+                  if(responseObj.data[i].et>=300){
+                    var cmg2="下午请假";
+                  }else{
+                    var cmg2="早退"+Math.round(responseObj.data[i].et)+"分钟";
+                  }
+                }else{
+                  var cmg2='';
+                }
+                if(cmg1==''&&cmg2==''){
+                  cmg3="正常"
+                }else{
+                  cmg3='';
                 }
                 $("#sign_tbody").append(
                   "<tr>"+"<td>"+
@@ -584,13 +704,18 @@
                   "</td><td>"+
                   ctime(responseObj.data[i].work_time)+
                   "</td><td>"+
-                  responseObj.data[i].situation+
+                  // responseObj.data[i].situation+
+                  // beforeTime(responseObj.data[i].start_date)+
+                  cmg1+" "+cmg2+" "+cmg3+
                   "</td></tr>")
               }
             }
           }
         });
         $("#clock_sign").modal('toggle');
+      });
+      $("#sign_enter").click(function(){
+        $(location).prop('href','<?php echo get_site_url() ?>/sign/')
       });
       $("#s_sign").click(function(){
         if($("#sign_name").val()!=''&&$("#sign_id").val()!=''){
@@ -612,13 +737,35 @@
           },
           success:function(response){
             var responseObj=JSON.parse(response);
-            console.log(responseObj);
             if(responseObj.rc==0){
               $("#sign_tbody").empty();
               $("#sign_table").css("display","block");
               for(var i=0; i<responseObj.data.length;i++){
                 if(responseObj.data[i].end_date=="0000-00-00 00:00:00"){
                   responseObj.data[i].end_date="未打卡";
+                }
+                if(responseObj.data[i].st<=0){
+                  var cmg1='';
+                }else{
+                  if(responseObj.data[i].st>=240){
+                    var cmg1="上午请假";
+                  }else{
+                    var cmg1="迟到"+Math.round(responseObj.data[i].st)+"分钟";
+                  } 
+                }
+                if(responseObj.data[i].et>0){
+                  if(responseObj.data[i].et>=300){
+                    var cmg2="下午请假";
+                  }else{
+                    var cmg2="早退"+Math.round(responseObj.data[i].et)+"分钟";
+                  }
+                }else{
+                  var cmg2='';
+                }
+                if(cmg1==''&&cmg2==''){
+                  cmg3="正常"
+                }else{
+                  cmg3='';
                 }
                 $("#sign_tbody").append(
                   "<tr>"+"<td>"+
@@ -632,7 +779,7 @@
                   "</td><td>"+
                   ctime(responseObj.data[i].work_time)+
                   "</td><td>"+
-                  responseObj.data[i].situation+
+                  cmg1+" "+cmg2+" "+cmg3+
                   "</td></tr>")
               }
             }
