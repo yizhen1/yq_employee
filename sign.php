@@ -73,7 +73,7 @@
                 }
             });
             $("#backbtn").click(function(){
-                history.back(-1);
+                $(location).prop('href','<?php echo get_site_url() ?>/work/');
             });
         });
     </script>

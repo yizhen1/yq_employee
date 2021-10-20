@@ -357,7 +357,7 @@
                 "</td><td>"+
                 "<button type='button' id='u_employees' name="+erdata.employee_id+">修改</button>"+
                 "<button type='button' id='d_employees' name="+erdata.employee_id+">删除</button>"+
-                "<button type='button' id='sign_id' name="+erdata.employee_id+">打卡</button>"+
+                "<button type='button' id='csign_id' name="+erdata.employee_id+">打卡</button>"+
                 "</td></tr>")
               }
               $("#table_select #u_employees").bind("click",function(){
@@ -401,7 +401,7 @@
                 $("#d_employee_id").text(id);
                 $("#d_value").val(id);
               });
-              $("#table_select #sign_id").bind("click",function(){
+              $("#table_select #csign_id").bind("click",function(){
                 var id=$(this).attr("name");
                 $(location).prop('href','<?php echo get_site_url() ?>/sign/?eid='+id);
               });
@@ -444,7 +444,7 @@
                 "</td><td>"+
                 "<button type='button' id='u_employees' name="+erdata.employee_id+">修改</button>"+
                 "<button type='button' id='d_employees' name="+erdata.employee_id+">删除</button>"+
-                "<button type='button' id='sign_id' name="+erdata.employee_id+">打卡</button>"+
+                "<button type='button' id='csign_id' name="+erdata.employee_id+">打卡</button>"+
                 "</td></tr>")
               }
               $("#table_select #u_employees").bind("click",function(){
@@ -488,7 +488,7 @@
                 $("#d_employee_id").text(id);
                 $("#d_value").val(id);
               });
-              $("#table_select #sign_id").bind("click",function(){
+              $("#table_select #csign_id").bind("click",function(){
                 var id=$(this).attr("name");
                 $(location).prop('href','<?php echo get_site_url() ?>/sign/?eid='+id);
               });
@@ -734,13 +734,15 @@
         $(location).prop('href','<?php echo get_site_url() ?>/sign/')
       });
       $("#s_sign").click(function(){
-        if($("#sign_name").val()!=''&&$("#sign_id").val()!=''){
-          $("#sign_mode").val(2);
-        }else{
-          if($("#sign_name").val()==''&&$("#sign_id").val()==''){
+        if($("#sign_name").val()==''&&$("#sign_id").val()==''){
           $("#sign_mode").val(1);
+        }else{
+          // alert("请填写信息");
+          if($("#sign_name").val()!=''&&$("#sign_id").val()!=''){
+            $("#sign_mode").val(2);
           }else{
-            alert("请填写信息");
+            // alert("填写信息");
+            $("#sign_mode").val(1);
           }
         }
         $.ajax({
