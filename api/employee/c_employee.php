@@ -31,7 +31,6 @@ if(empty($exists)){
         $rc=0;  
         $msg="添加员工成功";
     }
-    
 }else{
     $rc=4;
     $msg="已经存在该员工编号";

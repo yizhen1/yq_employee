@@ -14,32 +14,16 @@
   <body>
     <h1 class='text-center'>考勤签到</h1>
     <div class='text-center'>
-        <input type='hidden' value='' id='s_id'>
-        <button type='button' class='btn btn-success btn-lg' id='s_btn'>签到</button>
-    </div>
-    <div class="modal fade" id="sign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                &times;
-              </button>
-              <h4 class="modal-title" id="myModalLabel">
-                员工打卡
-              </h4>
-            </div>
-            <div class="modal-body">
-                <div style="display:flex;">
-                    <label>ID：</label>
-                    <input id="sign_id" type="text" value="" class="form-control">
-                </div>
-                <div style="display:flex; justify-content:center; margin-top:20px;">
-                    <input type="hidden" id="id" value="">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-success" id="c_sign" style="margin-left:12px;">提交</button>
-                </div>
-            </div>
+        <input type='hidden' value='' id='id'>
+        <div class="col-lg-6 col-lg-offset-3 col-md-12 col-sm-12 col-xs-12">
+          <div class="input-group">
+            <input type="text" id="sign_id" class="form-control" placeholder="请输入员工编号">
+            <span class="input-group-btn">
+            <button class="btn btn-success" type="button" id="c_sign"><span class="glyphicon glyphicon-search" style="margin-right:10px;"></span>签到</button>
+            </span>
           </div>
+        <div style="position:absolute; right:0; left:0; margin:0 auto; margin-top:25px;">
+                <button type="button" class="btn btn-default" id="backbtn">返回</button>
         </div>
     </div>
   <?php
@@ -54,30 +38,8 @@
             }else{
                 $error=5;
             }
-            // if($results=='true'){
-            //     $exist=$wpdb->get_results($wpdb->prepare("SELECT * FROM employee WHERE `employee_id` like %s",$eid));
-            //     if(isset($exist)){
-            //         if(empty($exist)){
-            //             echo "<h1>查询结果为空</h1>";
-            //             exit();
-            //         }else{
-                        
-            //         }
-            //     }else{
-            //         echo "<h1>该员工不存在</h1>";
-            //     }
-            //     echo "
-            //     <h1 class='text-center'>考勤签到</h1>
-            //     <div class='text-center'>
-            //         <input type='hidden' value='' id='s_id'>
-            //         <button type='button' class='btn btn-success btn-lg' id='s_btn'>签到</button>
-            //     </div>";
-            // }else{
-            //     echo "<h1>传参失败</h1>";
-            // }
         }
     }else{
-        // echo "<h1>出现错误</h1>";
         $error=4;
     }
 ?>
@@ -88,31 +50,7 @@
             $("#id").val("<?php echo $error ?>");
             if($("#id").val()==0){
                 $("#sign_id").val("<?php echo $eid ?>");
-                $("#sign").modal('toggle');
             }
-            $("#s_btn").click(function(){
-                // $("#s_id").val("<?php echo $eid ?>");
-                // if($("#s_id").val()==''){
-                //     alert("打卡失败");
-                // }else{
-                //     $.ajax({
-                //        tpye:"POST",
-                //        url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=c_clock',
-                //        data:{
-                //            sign_id:$("#s_id").val()
-                //        },
-                //        success:function(response){
-                //         var responseObj=JSON.parse(response);
-                //         if(responseObj.rc==0){
-                //             alert(responseObj.msg);
-                //         }else{
-                //             alert(responseObj.msg);
-                //         }
-                //        }
-                //     });
-                // }
-                $("#sign").modal('toggle');
-            });
             $("#c_sign").click(function(){
                 if($("#sign_id").val()==''){
                     alert("打卡失败");
@@ -124,15 +62,18 @@
                            sign_id:$("#sign_id").val()
                        },
                        success:function(response){
-                        var responseObj=JSON.parse(response);
-                        if(responseObj.rc==0){
-                            alert(responseObj.msg);
+                        var Obj=JSON.parse(response);
+                        if(Obj.rc==0){
+                            alert(Obj.msg);
                         }else{
-                            alert(responseObj.msg);
+                            alert(Obj.msg);
                         }
                        }
                     });
                 }
+            });
+            $("#backbtn").click(function(){
+                history.back(-1);
             });
         });
     </script>

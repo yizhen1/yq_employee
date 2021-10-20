@@ -18,7 +18,7 @@ if(isset($_REQUEST["mode"])){
                     //下班时间。
                     $rv->data[$i]->etime=date($rv->data[$i]->end_date);
                     if($rv->data[$i]->etime=="0000-00-00 00:00:00"){
-                        break;
+                        continue;
                     }
                     $date2=date_create(date($rv->data[$i]->end_date));
                     $rv->data[$i]->etime2=date_format($date,"Y-m-d 18:00:00");
@@ -56,7 +56,7 @@ if(isset($_REQUEST["mode"])){
                         //下班时间。
                         $rv->data[$i]->etime=date($rv->data[$i]->end_date);
                         if($rv->data[$i]->etime=="0000-00-00 00:00:00"){
-                            break;
+                            continue;
                         }
                         $date2=date_create(date($rv->data[$i]->end_date));
                         $rv->data[$i]->etime2=date_format($date,"Y-m-d 18:00:00");

@@ -1,6 +1,7 @@
 <?php
 /*Template Name: work */
-    global $wpdb;    
+    global $wpdb;   
+    require 'function.php'; 
 ?>
 <!doctype html>
 <html lang="zh-CN">
@@ -43,14 +44,16 @@
         </table>
       </div>
       <div  class="row" style="margin:0px; margin-top:25px; visibility:hidden;" id="msg">
-        <div class="col-lg-1 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_name_i"><span class="glyphicon glyphicon-user" style="margin-right:4px;"></span>姓名:</div></div>
-        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_id_i"><span class="glyphicon glyphicon-font" style="margin-right:4px;"></span>员工编号:</div></div>
-        <div class="col-lg-1 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_sex_i"><span class="glyphicon glyphicon-refresh" style="margin-right:4px;"></span>性别:</div></div>
-        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_card_i"><span class="glyphicon glyphicon-credit-card" style="margin-right:4px;"></span>身份证:</div></div>
-        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_birth_i"><span class="glyphicon glyphicon-calendar" style="margin-right:4px;"></span>出生日期:</div></div>
-        <div class="col-lg-1 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_grade_i"><span class="glyphicon glyphicon-king" style="margin-right:4px;"></span>等级:</div></div>
-        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_hire_i"><span class="glyphicon glyphicon-calendar" style="margin-right:4px;"></span>入职时间:</div></div>
-        <div class="col-lg-1 col-md-3 col-sm-6 col-xs-12 e-msg"><div id="employee_remark_i"><span class="glyphicon glyphicon-info-sign" style="margin-right:4px;"></span>备注:</div></div>
+        <?php
+         echo css(1,3,6,12,'employee_name_i','姓名');
+         echo css(2,3,6,12,'employee_id_i','员工编号'); 
+         echo css(1,3,6,12,'employee_sex_i','性别');
+         echo css(2,3,6,12,'employee_card_i','身份证');
+         echo css(2,3,6,12,'employee_birth_i','出生日期');
+         echo css(1,3,6,12,'employee_grade_i','等级');
+         echo css(2,3,6,12,'employee_hire_i','入职时间');
+         echo css(1,3,6,12,'employee_remark_i','备注');
+        ?>
       </div>
       <div class="modal fade" id="u_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -237,12 +240,14 @@
           </div>
         </div>
       </div>
-        <div style="display:flex; justify-content:center; margin-top:25px;">
-          <button type="button" class="btn btn-info" id="c_employee" style="margin-right:20px;"><span class="glyphicon glyphicon-plus" style="margin-right:10px;"></span>添加</button>
-          <button type="button" class="btn btn-success" id="sign" style="margin-left:20px;"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>打卡记录</button>
-          <button type="button" class="btn btn-success"  style="margin-left:20px;" id="sign_enter">打卡入口</button>
-          <button type="button" class="btn btn-default" id="r_show" style="margin-left:20px;">显示/折叠列表</button>
-        </div>
+      <div class="col-md-offset-1 col-xs-offset-1 col-lg-offset-3">
+        <?php
+        echo b_css(2,3,6,6,'c_employee','添&nbsp;&nbsp;&nbsp;&nbsp;加','btn btn-info');
+        echo b_css(2,3,6,6,'sign','打卡记录','btn btn-success');
+        echo b_css(2,3,6,6,'sign_enter','打卡入口','btn btn-success');
+        echo b_css(2,3,6,6,'r_show','显示/折叠列表','btn btn-default');
+        ?>
+      </div>
       <div class="modal fade" id="clock_sign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -323,34 +328,36 @@
         type:"POST",
         url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=r_employee',
         success:function(response){
-          var responseObj=JSON.parse(response);
-          if(responseObj.rc==0){
-            for(var i=0; i<responseObj.data.length;i++){
-              if(responseObj.data[i].sex==1){
+          var Obj=JSON.parse(response);
+          if(Obj.rc==0){
+            for(var i=0; i<Obj.data.length;i++){
+                var erdata=Obj.data[i];
+              if(erdata.sex==1){
                 var e_sex="男";
               }else{
                 e_sex="女";
               }
               $("#table_select").append(
                 "<tr>"+"<td>"+
-                responseObj.data[i].e_name+
+                erdata.e_name+
                 "</td><td>"+
-                responseObj.data[i].employee_id+
+                erdata.employee_id+
                 "</td><td>"+      
                 e_sex+
                 "</td><td>"+
-                responseObj.data[i].id_card+
+                erdata.id_card+
                 "</td><td>"+
-                responseObj.data[i].birthday+
+                erdata.birthday+
                 "</td><td>"+
-                responseObj.data[i].e_grade+
+                erdata.e_grade+
                 "</td><td>"+
-                responseObj.data[i].hire_date+
+                erdata.hire_date+
                 "</td><td>"+
-                responseObj.data[i].remarks+
+                erdata.remarks+
                 "</td><td>"+
-                "<button type='button' id='u_employees' name="+responseObj.data[i].employee_id+">修改</button>"+
-                "<button type='button' id='d_employees' name="+responseObj.data[i].employee_id+">删除</button>"+
+                "<button type='button' id='u_employees' name="+erdata.employee_id+">修改</button>"+
+                "<button type='button' id='d_employees' name="+erdata.employee_id+">删除</button>"+
+                "<button type='button' id='sign_id' name="+erdata.employee_id+">打卡</button>"+
                 "</td></tr>")
               }
               $("#table_select #u_employees").bind("click",function(){
@@ -364,20 +371,21 @@
                       employee_id:id
                     },
                     success:function(response){
-                      var responseObj=JSON.parse(response);
-                      console.log(responseObj);
-                      if(responseObj.rc==0){
+                      var Obj=JSON.parse(response);
+                      console.log(Obj);
+                      if(Obj.rc==0){
+                        var erdata=Obj.data[0];
                         $("#u_modal").modal('toggle');
-                        $("#u_id").val(responseObj.data[0].id);
-                        $("#update_name").val(responseObj.data[0].e_name);
-                        $("#update_birth").val(responseObj.data[0].birthday);
-                        $("#update_grade").val(responseObj.data[0].e_grade);
-                        $("#update_hire").val(responseObj.data[0].hire_date);
-                        $("#update_remarks").val(responseObj.data[0].remarks);
-                        $("#update_card").val(responseObj.data[0].id_card);
-                        $("#update_id").val(responseObj.data[0].employee_id);
-                        $("#u_same").val(responseObj.data[0].employee_id);
-                        if($("#update_sex1").val()==responseObj.data[0].sex){
+                        $("#u_id").val(erdata.id);
+                        $("#update_name").val(erdata.e_name);
+                        $("#update_birth").val(erdata.birthday);
+                        $("#update_grade").val(erdata.e_grade);
+                        $("#update_hire").val(erdata.hire_date);
+                        $("#update_remarks").val(erdata.remarks);
+                        $("#update_card").val(erdata.id_card);
+                        $("#update_id").val(erdata.employee_id);
+                        $("#u_same").val(erdata.employee_id);
+                        if($("#update_sex1").val()==erdata.sex){
                             $("#update_sex1").prop("checked",true);
                         }else{
                             $("#update_sex2").prop("checked",true);
@@ -392,6 +400,10 @@
                 $("#d_modal").modal('toggle');
                 $("#d_employee_id").text(id);
                 $("#d_value").val(id);
+              });
+              $("#table_select #sign_id").bind("click",function(){
+                var id=$(this).attr("name");
+                $(location).prop('href','<?php echo get_site_url() ?>/sign/?eid='+id);
               });
                 //ajax异步请求.
           }
@@ -403,34 +415,36 @@
         type:"POST",
         url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=r_employee',
         success:function(response){
-          var responseObj=JSON.parse(response);
-          if(responseObj.rc==0){
-            for(var i=0; i<responseObj.data.length;i++){
-              if(responseObj.data[i].sex==1){
+          var Obj=JSON.parse(response);
+          if(Obj.rc==0){
+            for(var i=0; i<Obj.data.length;i++){
+              var erdata=Obj.data[i];
+              if(erdata.sex==1){
                 var e_sex="男";
               }else{
                 e_sex="女";
               }
               $("#table_select").append(
                 "<tr>"+"<td>"+
-                responseObj.data[i].e_name+
+                erdata.e_name+
                 "</td><td>"+
-                responseObj.data[i].employee_id+
+                erdata.employee_id+
                 "</td><td>"+      
                 e_sex+
                 "</td><td>"+
-                responseObj.data[i].id_card+
+                erdata.id_card+
                 "</td><td>"+
-                responseObj.data[i].birthday+
+                erdata.birthday+
                 "</td><td>"+
-                responseObj.data[i].e_grade+
+                erdata.e_grade+
                 "</td><td>"+
-                responseObj.data[i].hire_date+
+                erdata.hire_date+
                 "</td><td>"+
-                responseObj.data[i].remarks+
+                erdata.remarks+
                 "</td><td>"+
-                "<button type='button' id='u_employees' name="+responseObj.data[i].employee_id+">修改</button>"+
-                "<button type='button' id='d_employees' name="+responseObj.data[i].employee_id+">删除</button>"+
+                "<button type='button' id='u_employees' name="+erdata.employee_id+">修改</button>"+
+                "<button type='button' id='d_employees' name="+erdata.employee_id+">删除</button>"+
+                "<button type='button' id='sign_id' name="+erdata.employee_id+">打卡</button>"+
                 "</td></tr>")
               }
               $("#table_select #u_employees").bind("click",function(){
@@ -444,20 +458,21 @@
                       employee_id:id
                     },
                     success:function(response){
-                      var responseObj=JSON.parse(response);
-                      console.log(responseObj);
-                      if(responseObj.rc==0){
+                      var Obj=JSON.parse(response);
+                      console.log(Obj);
+                      if(Obj.rc==0){
+                        var erdata=Obj.data[0];
                         $("#u_modal").modal('toggle');
-                        $("#u_id").val(responseObj.data[0].id);
-                        $("#update_name").val(responseObj.data[0].e_name);
-                        $("#update_birth").val(responseObj.data[0].birthday);
-                        $("#update_grade").val(responseObj.data[0].e_grade);
-                        $("#update_hire").val(responseObj.data[0].hire_date);
-                        $("#update_remarks").val(responseObj.data[0].remarks);
-                        $("#update_card").val(responseObj.data[0].id_card);
-                        $("#update_id").val(responseObj.data[0].employee_id);
-                        $("#u_same").val(responseObj.data[0].employee_id);
-                        if($("#update_sex1").val()==responseObj.data[0].sex){
+                        $("#u_id").val(erdata.id);
+                        $("#update_name").val(erdata.e_name);
+                        $("#update_birth").val(erdata.birthday);
+                        $("#update_grade").val(erdata.e_grade);
+                        $("#update_hire").val(erdata.hire_date);
+                        $("#update_remarks").val(erdata.remarks);
+                        $("#update_card").val(erdata.id_card);
+                        $("#update_id").val(erdata.employee_id);
+                        $("#u_same").val(erdata.employee_id);
+                        if($("#update_sex1").val()==erdata.sex){
                             $("#update_sex1").prop("checked",true);
                         }else{
                             $("#update_sex2").prop("checked",true);
@@ -472,6 +487,10 @@
                 $("#d_modal").modal('toggle');
                 $("#d_employee_id").text(id);
                 $("#d_value").val(id);
+              });
+              $("#table_select #sign_id").bind("click",function(){
+                var id=$(this).attr("name");
+                $(location).prop('href','<?php echo get_site_url() ?>/sign/?eid='+id);
               });
                 //ajax异步请求.
           }
@@ -489,15 +508,14 @@
           url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=u_employee',
           data:$("#u_form").serialize(),
           success:function(response){
-            var responseObj=JSON.parse(response);
-            console.log(responseObj);
-            if(responseObj.rc==0){
-              // alert(responseObj.msg);
+            var Obj=JSON.parse(response);
+            console.log(Obj);
+            if(Obj.rc==0){
               $("#u_modal").modal("toggle");
               $("#table_select").empty();
               read();
             }else{
-              alert(responseObj.msg);
+              alert(Obj.msg);
             }
           }
         });
@@ -512,14 +530,14 @@
               d_id:$("#d_value").val()
             },
             success:function(response){
-              var responseObj = JSON.parse(response);
-              console.log(responseObj);
-              if(responseObj.rc==0){
+              var Obj = JSON.parse(response);
+              console.log(Obj);
+              if(Obj.rc==0){
                 $("#d_modal").modal("toggle");
                 $("#table_select").empty();
                 read();
               }else{  
-                alert(responseObj.msg);
+                alert(Obj.msg);
               }
             }
           });
@@ -541,9 +559,10 @@
               employee_id:$("#select-input").val()
             },
             success:function(response){
-              var responseObj=JSON.parse(response);
-              console.log(responseObj);
-              if(responseObj.rc==0){
+              var Obj=JSON.parse(response);
+              console.log(Obj);
+              if(Obj.rc==0){
+                var erdata=Obj.data[0];
                 $(".table-style").css("display","none");
                 if($("#index").text()==$("#select-input").val()){
 
@@ -552,20 +571,20 @@
                     $(".e-msg p").remove();
                   }
                   $("#msg").css("visibility","initial");
-                  $("#u_id").val(responseObj.data[0].id);
-                  $("#u_same").val(responseObj.data[0].employee_id);
-                  $("#employee_name_i").after('<p>'+responseObj.data[0].e_name+'</p>');
-                  $("#employee_id_i").after('<p id="index">'+responseObj.data[0].employee_id+'</p>');
-                  if(responseObj.data[0].sex==1){
+                  $("#u_id").val(erdata.id);
+                  $("#u_same").val(erdata.employee_id);
+                  $("#employee_name_i").after('<p>'+erdata.e_name+'</p>');
+                  $("#employee_id_i").after('<p id="index">'+erdata.employee_id+'</p>');
+                  if(erdata.sex==1){
                     $("#employee_sex_i").after('<p>'+"男"+'</p>');
                   }else{
                     $("#employee_sex_i").after('<p>'+"女"+'</p>');
                   }
-                  $("#employee_card_i").after('<p>'+responseObj.data[0].id_card+'</p>');
-                  $("#employee_birth_i").after('<p>'+responseObj.data[0].birthday+'</p>');
-                  $("#employee_grade_i").after('<p>'+responseObj.data[0].e_grade+'</p');
-                  $("#employee_hire_i").after('<p>'+responseObj.data[0].hire_date+'</p>');
-                  $("#employee_remark_i").after('<p>'+responseObj.data[0].remarks+'</p>'); 
+                  $("#employee_card_i").after('<p>'+erdata.id_card+'</p>');
+                  $("#employee_birth_i").after('<p>'+erdata.birthday+'</p>');
+                  $("#employee_grade_i").after('<p>'+erdata.e_grade+'</p');
+                  $("#employee_hire_i").after('<p>'+erdata.hire_date+'</p>');
+                  $("#employee_remark_i").after('<p>'+erdata.remarks+'</p>'); 
                 }
               }else{
                 alert("查询为空");
@@ -584,14 +603,14 @@
           url:'<?php echo get_site_url() ?>/api-data/?module=employee&action=c_employee',
           data:$("#c_form").serialize(),
           success:function(response){
-            var responseObj=JSON.parse(response);
-            console.log(responseObj);
-            if(responseObj.rc==0){
+            var Obj=JSON.parse(response);
+            console.log(Obj);
+            if(Obj.rc==0){
               $("#c_modal").modal("toggle");
               $("#table_select").empty();
               read();
             }else{
-              alert(responseObj.msg);
+              alert(Obj.msg);
             }
           }
         });
@@ -614,27 +633,28 @@
               employee_id:$("#u_same").val()
             },
             success:function(response){
-              var responseObj=JSON.parse(response);
-              console.log(responseObj);
-              if(responseObj.rc==0){
+              var Obj=JSON.parse(response);
+              console.log(Obj);
+              if(Obj.rc==0){
+                var erdata=Obj.data[0];
                 $("#s_action").modal('toggle');
                 $("#u_modal").modal('toggle');
-                $("#u_id").val(responseObj.data[0].id);
-                $("#update_name").val(responseObj.data[0].e_name);
-                $("#update_birth").val(responseObj.data[0].birthday);
-                $("#update_grade").val(responseObj.data[0].e_grade);
-                $("#update_hire").val(responseObj.data[0].hire_date);
-                $("#update_remarks").val(responseObj.data[0].remarks);
-                $("#update_card").val(responseObj.data[0].id_card);
-                $("#update_id").val(responseObj.data[0].employee_id);
-                $("#u_same").val(responseObj.data[0].employee_id);
-                if($("#update_sex1").val()==responseObj.data[0].sex){
+                $("#u_id").val(erdata.id);
+                $("#update_name").val(erdata.e_name);
+                $("#update_birth").val(erdata.birthday);
+                $("#update_grade").val(erdata.e_grade);
+                $("#update_hire").val(erdata.hire_date);
+                $("#update_remarks").val(erdata.remarks);
+                $("#update_card").val(erdata.id_card);
+                $("#update_id").val(erdata.employee_id);
+                $("#u_same").val(erdata.employee_id);
+                if($("#update_sex1").val()==erdata.sex){
                     $("#update_sex1").prop("checked",true);
                 }else{
                     $("#update_sex2").prop("checked",true);
                 }
               }else{
-                alert(responseObj.meg);
+                alert(Obj.meg);
               }
             }
           });
@@ -657,32 +677,30 @@
             mode:$("#sign_mode").val()
           },
           success:function(response){
-            var responseObj=JSON.parse(response);
-            // console.log(responseObj);
-            if(responseObj.rc==0){
+            var Obj=JSON.parse(response);
+            if(Obj.rc==0){
               $("#sign_tbody").empty();
               $("#sign_table").css("display","block");
               console.log("查询成功");
-              for(var i=0; i<responseObj.data.length;i++){
-                // console.log(responseObj.data[i]);
-                if(responseObj.data[i].end_date=="0000-00-00 00:00:00"){
-                  responseObj.data[i].end_date="未打卡";
-                }
-                
-                if(responseObj.data[i].st<=0){
+              for(var i=0; i<Obj.data.length;i++){
+                var crdata=Obj.data[i];
+                if(crdata.end_date=="0000-00-00 00:00:00"){
+                  crdata.end_date="未打卡";
+                } 
+                if(crdata.st<=0){
                   var cmg1='';
                 }else{
-                  if(responseObj.data[i].st>=240){
+                  if(crdata.st>=240){
                     var cmg1="上午请假";
                   }else{
-                    var cmg1="迟到"+Math.round(responseObj.data[i].st)+"分钟";
+                    var cmg1="迟到"+Math.round(crdata.st)+"分钟";
                   } 
                 }
-                if(responseObj.data[i].et>0){
-                  if(responseObj.data[i].et>=300){
+                if(crdata.et>0){
+                  if(crdata.et>=300){
                     var cmg2="下午请假";
                   }else{
-                    var cmg2="早退"+Math.round(responseObj.data[i].et)+"分钟";
+                    var cmg2="早退"+Math.round(crdata.et)+"分钟";
                   }
                 }else{
                   var cmg2='';
@@ -694,18 +712,16 @@
                 }
                 $("#sign_tbody").append(
                   "<tr>"+"<td>"+
-                  responseObj.data[i].e_name+
+                  crdata.e_name+
                   "</td><td>"+
-                  responseObj.data[i].employee_id+
+                  crdata.employee_id+
                   "</td><td>"+
-                  responseObj.data[i].start_date+
+                  crdata.start_date+
                   "</td><td>"+
-                  responseObj.data[i].end_date+
+                  crdata.end_date+
                   "</td><td>"+
-                  ctime(responseObj.data[i].work_time)+
+                  ctime(crdata.work_time)+
                   "</td><td>"+
-                  // responseObj.data[i].situation+
-                  // beforeTime(responseObj.data[i].start_date)+
                   cmg1+" "+cmg2+" "+cmg3+
                   "</td></tr>")
               }
@@ -736,28 +752,29 @@
             mode:$("#sign_mode").val()
           },
           success:function(response){
-            var responseObj=JSON.parse(response);
-            if(responseObj.rc==0){
+            var Obj=JSON.parse(response);
+            if(Obj.rc==0){
               $("#sign_tbody").empty();
               $("#sign_table").css("display","block");
-              for(var i=0; i<responseObj.data.length;i++){
-                if(responseObj.data[i].end_date=="0000-00-00 00:00:00"){
-                  responseObj.data[i].end_date="未打卡";
+              for(var i=0; i<Obj.data.length;i++){
+                var crdata=Obj.data[i];
+                if(crdata.end_date=="0000-00-00 00:00:00"){
+                  crdata.end_date="未打卡";
                 }
-                if(responseObj.data[i].st<=0){
+                if(crdata.st<=0){
                   var cmg1='';
                 }else{
-                  if(responseObj.data[i].st>=240){
+                  if(crdata.st>=240){
                     var cmg1="上午请假";
                   }else{
-                    var cmg1="迟到"+Math.round(responseObj.data[i].st)+"分钟";
+                    var cmg1="迟到"+Math.round(crdata.st)+"分钟";
                   } 
                 }
-                if(responseObj.data[i].et>0){
-                  if(responseObj.data[i].et>=300){
+                if(crdata.et>0){
+                  if(crdata.et>=300){
                     var cmg2="下午请假";
                   }else{
-                    var cmg2="早退"+Math.round(responseObj.data[i].et)+"分钟";
+                    var cmg2="早退"+Math.round(crdata.et)+"分钟";
                   }
                 }else{
                   var cmg2='';
@@ -769,15 +786,15 @@
                 }
                 $("#sign_tbody").append(
                   "<tr>"+"<td>"+
-                  responseObj.data[i].e_name+
+                  crdata.e_name+
                   "</td><td>"+
-                  responseObj.data[i].employee_id+
+                  crdata.employee_id+
                   "</td><td>"+
-                  responseObj.data[i].start_date+
+                  crdata.start_date+
                   "</td><td>"+
-                  responseObj.data[i].end_date+
+                  crdata.end_date+
                   "</td><td>"+
-                  ctime(responseObj.data[i].work_time)+
+                  ctime(crdata.work_time)+
                   "</td><td>"+
                   cmg1+" "+cmg2+" "+cmg3+
                   "</td></tr>")
@@ -786,6 +803,7 @@
           }
         })
       });
+
     });
   </script>
   </body>
@@ -812,6 +830,9 @@
       white-space:pre;
       display:flex;
       word-break:break-all;
+    }
+    #sign_id{
+      margin-left:4px;
     }
 </style>
 </html>
