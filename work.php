@@ -864,6 +864,8 @@
                   cmg1+" "+cmg2+" "+cmg3+
                   "</td></tr>")
               }
+            }else{
+              alert(Obj.msg);
             }
           }
         })
