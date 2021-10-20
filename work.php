@@ -599,6 +599,7 @@
                 $("#d_modal").modal("toggle");
                 $("#table_select").empty();
                 read();
+                c_read('','',1);
               }else{  
                 alert(Obj.msg);
               }
