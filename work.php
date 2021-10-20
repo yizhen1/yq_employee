@@ -234,8 +234,10 @@
               <div style="display:flex; justify-content:center;">
               <input type="hidden" id="goals" value="">
               <button type="button" class="btn btn-info" id="u_action">修改</button>
-              <button type="button" class="btn btn-danger" style="margin-left:50px;" id="d_action">删除</button>
-              </div>
+              <button type="button" class="btn btn-danger" style="margin-left:20px;" id="d_action">删除</button>
+              <button type="button" class="btn btn-success" style="margin-left:20px;" id="sign_action">签到</button>
+
+            </div>
             </div>
           </div>
         </div>
@@ -413,6 +415,7 @@
   function c_read(name,id,mode){
     $("#sign_name").val('');
     $("#sign_id").val('');
+    $("#sign_tbody").empty();
     $.ajax({
           type:"POST",
           url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=r_clock',
@@ -637,18 +640,18 @@
                   $("#msg").css("visibility","initial");
                   $("#u_id").val(erdata.id);
                   $("#u_same").val(erdata.employee_id);
-                  $("#employee_name_i").after('<p>'+erdata.e_name+'</p>');
-                  $("#employee_id_i").after('<p id="index">'+erdata.employee_id+'</p>');
+                  $("#employee_name_i").after(':&nbsp'+'<p>'+erdata.e_name+'</p>');
+                  $("#employee_id_i").after(':&nbsp'+'<p id="index">'+erdata.employee_id+'</p>');
                   if(erdata.sex==1){
-                    $("#employee_sex_i").after('<p>'+"男"+'</p>');
+                    $("#employee_sex_i").after(':&nbsp'+'<p>'+"男"+'</p>');
                   }else{
-                    $("#employee_sex_i").after('<p>'+"女"+'</p>');
+                    $("#employee_sex_i").after(':&nbsp'+'<p>'+"女"+'</p>');
                   }
-                  $("#employee_card_i").after('<p>'+erdata.id_card+'</p>');
-                  $("#employee_birth_i").after('<p>'+erdata.birthday+'</p>');
-                  $("#employee_grade_i").after('<p>'+erdata.e_grade+'</p');
-                  $("#employee_hire_i").after('<p>'+erdata.hire_date+'</p>');
-                  $("#employee_remark_i").after('<p>'+erdata.remarks+'</p>'); 
+                  $("#employee_card_i").after(':&nbsp'+'<p>'+erdata.id_card+'</p>');
+                  $("#employee_birth_i").after(':&nbsp'+'<p>'+erdata.birthday+'</p>');
+                  $("#employee_grade_i").after(':&nbsp'+'<p>'+erdata.e_grade+'</p');
+                  $("#employee_hire_i").after(':&nbsp'+'<p>'+erdata.hire_date+'</p>');
+                  $("#employee_remark_i").after(':&nbsp'+'<p>'+erdata.remarks+'</p>'); 
                 }
               }else{
                 alert("查询为空");
@@ -729,6 +732,11 @@
         $("#d_employee_id").text($("#goals").val())
         $("#d_value").val($("#goals").val());
         $("#d_modal").modal('toggle');
+      });
+      $("#sign_action").click(function(){
+        $("#s_action").modal('toggle');
+        var id=$("#goals").val();
+        $(location).prop('href','<?php echo get_site_url() ?>/sign/?eid='+id);
       });
       $("#sign").click(function(){
         if($("#sign_name").val()==''&&$("#sign_id").val()==''){
