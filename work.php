@@ -410,6 +410,69 @@
         }
       });
   }
+  function c_read(name,id,mode){
+    $("#sign_name").val('');
+    $("#sign_id").val('');
+    $.ajax({
+          type:"POST",
+          url:'<?php echo get_site_url() ?>/api-data/?module=clock&action=r_clock',
+          data:{
+            r_name:name,
+            r_id:id,
+            mode:mode
+          },
+          success:function(response){
+            var Obj=JSON.parse(response);
+            if(Obj.rc==0){
+              $("#sign_tbody").empty();
+              $("#sign_table").css("display","block");
+              for(var i=0; i<Obj.data.length;i++){
+                var crdata=Obj.data[i];
+                if(crdata.end_date=="0000-00-00 00:00:00"){
+                  crdata.end_date="未打卡";
+                }
+                if(crdata.st<=0){
+                  var cmg1='';
+                }else{
+                  if(crdata.st>=240){
+                    var cmg1="上午请假";
+                  }else{
+                    var cmg1="迟到"+Math.round(crdata.st)+"分钟";
+                  } 
+                }
+                if(crdata.et>0){
+                  if(crdata.et>=300){
+                    var cmg2="下午请假";
+                  }else{
+                    var cmg2="早退"+Math.round(crdata.et)+"分钟";
+                  }
+                }else{
+                  var cmg2='';
+                }
+                if(cmg1==''&&cmg2==''){
+                  cmg3="正常"
+                }else{
+                  cmg3='';
+                }
+                $("#sign_tbody").append(
+                  "<tr>"+"<td>"+
+                  crdata.e_name+
+                  "</td><td>"+
+                  crdata.employee_id+
+                  "</td><td>"+
+                  crdata.start_date+
+                  "</td><td>"+
+                  crdata.end_date+
+                  "</td><td>"+
+                  ctime(crdata.work_time)+
+                  "</td><td>"+
+                  cmg1+" "+cmg2+" "+cmg3+
+                  "</td></tr>")
+              }
+            }
+          }
+        })
+  }
     $(function(){
       $.ajax({
         type:"POST",
@@ -741,8 +804,7 @@
           if($("#sign_name").val()!=''&&$("#sign_id").val()!=''){
             $("#sign_mode").val(2);
           }else{
-            // alert("填写信息");
-            $("#sign_mode").val(1);
+            alert("填写信息");
           }
         }
         $.ajax({
@@ -805,7 +867,9 @@
           }
         })
       });
-
+      $("#clock_sign").on('hidden.bs.modal',function(){
+        c_read('','',1);
+      });
     });
   </script>
   </body>
